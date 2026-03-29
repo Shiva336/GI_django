@@ -57,3 +57,24 @@ New,test@gmail.com,30
 
         with self.assertRaises(ValueError):
             process_csv(file)
+            
+    def test_duplicate_within_csv(self):
+        csv_content = """name,email,age
+A,a@gmail.com,20
+B,a@gmail.com,25
+"""
+        file = self.create_csv_file(csv_content)
+        file.name = "test.csv"
+
+        result = process_csv(file)
+
+        self.assertEqual(result["success_count"], 1)
+        self.assertEqual(result["failure_count"], 1)
+        
+    def test_empty_csv(self):
+        csv_content = ""
+        file = self.create_csv_file(csv_content)
+        file.name = "test.csv"
+
+        with self.assertRaises(ValueError):
+            process_csv(file)

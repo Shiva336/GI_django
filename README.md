@@ -49,6 +49,16 @@ users/
 
 ---
 
+## Logging
+
+Basic logging has been added to track CSV processing steps, validation failures, and database inserts. Logs are written to both console and file (`app.log`).
+
+## Test Results
+
+All unit tests have been executed successfully.
+
+See screenshot: `test_results/test_output.png`
+
 ## Future improvements
 - Move CSV processing to a background worker (e.g., Celery + Redis) for handling large files and improving API responsiveness
 
