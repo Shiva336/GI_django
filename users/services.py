@@ -2,6 +2,9 @@ from .models import User
 from .serializers import UserSerializer
 from .utils import validate_csv_file, parse_csv
 from django.db import transaction
+import logging
+
+logger = logging.getLogger(__name__)
 
 def process_csv(file):
     """
@@ -25,6 +28,7 @@ def process_csv(file):
         serializer = UserSerializer(data=row_data)   
     
         if not serializer.is_valid():
+            logger.warning(f"Validation failed at row {row_number}: {serializer.errors}")
             errors.append({"row":row_number, "errors":serializer.errors})
             failure_count+= 1
             continue
@@ -33,6 +37,7 @@ def process_csv(file):
         email = validated_data["email"]
         
         if email in existing_emails or email in seen_emails:
+            logger.info(f"Duplicate email skipped at row {row_number}: {email}")
             errors.append({"row":row_number, "errors":{"email": ["Skipping duplicate email"]}})
             failure_count+= 1
             continue
@@ -44,6 +49,10 @@ def process_csv(file):
     
     with transaction.atomic():
         User.objects.bulk_create(valid_onjects)
+        
+    logger.info(f"Inserted {len(valid_onjects)} records successfully")
+
+    logger.info("CSV processing completed")
         
     success_count = len(valid_onjects)
     
