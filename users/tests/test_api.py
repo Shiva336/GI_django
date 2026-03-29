@@ -11,10 +11,9 @@ class UserCSVUploadAPITest(APITestCase):
     def test_upload_valid_csv(self):
         url = reverse("user-csv-upload")
 
-        csv_content = """
-            name,email,age
-            John,john@gmail.com,25
-        """
+        csv_content = """name,email,age
+Shiva,shiva@gmail.com,25
+"""
 
         file = self.create_csv_file(csv_content)
 

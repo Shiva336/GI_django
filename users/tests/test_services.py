@@ -10,11 +10,10 @@ class ProcessCSVTest(TestCase):
         return io.BytesIO(content.encode("utf-8"))
 
     def test_valid_csv(self):
-        csv_content = """
-            name,email,age
-            John,john@gmail.com,25
-            Jane,jane@gmail.com,30
-        """
+        csv_content = """name,email,age
+Shiva,shiva@gmail.com,25
+Sundar,sundar@gmail.com,30
+"""
         file = self.create_csv_file(csv_content)
         file.name = "test.csv"
 
@@ -25,10 +24,9 @@ class ProcessCSVTest(TestCase):
         self.assertEqual(User.objects.count(), 2)
 
     def test_invalid_rows(self):
-        csv_content = """
-            name,email,age
-            ,invalid-email,200
-        """
+        csv_content = """name,email,age
+,invalid-email,200
+"""
         file = self.create_csv_file(csv_content)
         file.name = "test.csv"
 
@@ -41,10 +39,9 @@ class ProcessCSVTest(TestCase):
     def test_duplicate_email(self):
         User.objects.create(name="Existing", email="test@gmail.com", age=25)
 
-        csv_content = """
-            name,email,age
-            New,test@gmail.com,30
-        """
+        csv_content = """name,email,age
+New,test@gmail.com,30
+"""
         file = self.create_csv_file(csv_content)
         file.name = "test.csv"
 

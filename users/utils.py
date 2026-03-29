@@ -15,13 +15,14 @@ def parse_csv(file):
     Parse the CSV file and return the list of rows as dicts
     """
     try:
-        decoded_file = TextIOWrapper(file.file,encoding="utf-8")
+        file_obj = getattr(file, "file", file)
+        decoded_file = TextIOWrapper(file_obj,encoding="utf-8")
         reader = csv.DictReader(decoded_file)
         
         rows = []
         
         for row_number, row in enumerate(reader, start=1):
-            cleaned_row = {key.strip(): value.strip() for key, value in row.items()}
+            cleaned_row = {key.strip(): value.strip() for key, value in row.items() if key}
             rows.append((row_number, cleaned_row))
             
         if not rows:
