@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from .services import process_csv
 
-# Create your views here.
+class UserCSVUploadAPIView(APIView):
+    """
+    API to upload CSV and process user data
+    """
+    
+    def post(self, request):
+        pass
+    
+
