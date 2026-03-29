@@ -1,0 +1,19 @@
+{
+  "success_count": 2,
+  "failure_count": 2,
+  "errors": [
+    {
+      "row": 3,
+      "errors": {
+        "email": ["Enter a valid email address."],
+        "age": ["Age must be between 0 and 120"]
+      }
+    },
+    {
+      "row": 4,
+      "errors": {
+        "email": ["skipping duplicate email"]
+      }
+    }
+  ]
+}
