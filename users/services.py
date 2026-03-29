@@ -17,7 +17,7 @@ def process_csv(file):
     existing_emails = set(User.objects.values_list("email", flat=True))
     
     seen_emails = set()
-    valid_onjects = []
+    valid_objects = []
     errors = []
     
     success_count, failure_count = 0,0
@@ -45,16 +45,16 @@ def process_csv(file):
         seen_emails.add(email)
         
         user = User(**validated_data)
-        valid_onjects.append(user)
+        valid_objects.append(user)
     
     with transaction.atomic():
-        User.objects.bulk_create(valid_onjects)
+        User.objects.bulk_create(valid_objects)
         
-    logger.info(f"Inserted {len(valid_onjects)} records successfully")
+    logger.info(f"Inserted {len(valid_objects)} records successfully")
 
     logger.info("CSV processing completed")
         
-    success_count = len(valid_onjects)
+    success_count = len(valid_objects)
     
     return {
         "success_count": success_count,
