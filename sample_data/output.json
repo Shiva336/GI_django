@@ -1,18 +1,48 @@
 {
-  "success_count": 2,
-  "failure_count": 2,
+  "success_count": 15,
+  "failure_count": 5,
   "errors": [
     {
       "row": 3,
       "errors": {
-        "email": ["Enter a valid email address."],
-        "age": ["Age must be between 0 and 120"]
+        "email": [
+          "Enter a valid email address."
+        ],
+        "age": [
+          "Age must be a number between 0 and 120"
+        ]
       }
     },
     {
-      "row": 4,
+      "row": 11,
       "errors": {
-        "email": ["skipping duplicate email"]
+        "name": [
+          "This field may not be blank."
+        ]
+      }
+    },
+    {
+      "row": 12,
+      "errors": {
+        "email": [
+          "Enter a valid email address."
+        ]
+      }
+    },
+    {
+      "row": 13,
+      "errors": {
+        "age": [
+          "Age must be a number between 0 and 120"
+        ]
+      }
+    },
+    {
+      "row": 20,
+      "errors": {
+        "email": [
+          "Skipping duplicate email"
+        ]
       }
     }
   ]
